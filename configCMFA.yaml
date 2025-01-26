@@ -80,7 +80,7 @@ proxies:
     server: 104.22.20.245
     port: 443
     type: trojan
-    password: 375feb10-db47-11ef-841e-1239d0255272
+    password: 941de990-dbb5-11ef-b637-205c6d5f5d78
     skip-cert-verify: true
     sni: asia1.fufo.org
     network: ws
