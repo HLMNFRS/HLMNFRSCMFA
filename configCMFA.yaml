@@ -89,6 +89,22 @@ proxies:
       headers:
         Host: asia1.fufo.org
     udp: true
+  - name: Vmess OpTunel
+    server: 104.26.7.171
+    port: 443
+    type: vmess
+    uuid: a40d34c6-b77c-4648-9210-3e8d2f4226b5
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: sgv-3.openv2ray.com
+    network: ws
+    ws-opts:
+      path: /opentunnel?user=opentunnel.net-yuhg
+      headers:
+        Host: sgv-3.openv2ray.com
+    udp: true
 proxy-groups:
   - name: ID-X
     type: fallback
@@ -99,6 +115,7 @@ proxy-groups:
       - SG Vless-WS(2025-02-01)
       - 443 Vmess Singapore HE-1 Limit 2025-01-30
       - SG Trojan-WS
+      - Vmess OpTunel
 
   - name: MIX-X
     type: fallback
@@ -109,6 +126,7 @@ proxy-groups:
       - SG Vless-WS(2025-02-01)
       - 443 Vmess Singapore HE-1 Limit 2025-01-30
       - SG Trojan-WS
+      - Vmess OpTunel
       
   - name: IKLAN
     type: select
