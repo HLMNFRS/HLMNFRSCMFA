@@ -124,7 +124,7 @@ proxies:
     udp: true
 
 proxy-groups:
-  - name: MIX-X
+- name: MIX-X
   type: load-balance
   strategy: round-robin
   disable-udp: false
