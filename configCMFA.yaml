@@ -76,7 +76,19 @@ proxies:
       headers:
         Host: sg-1.hihu.net
     udp: true
-
+  - name: SG Trojan-WS
+    server: 104.22.20.245
+    port: 443
+    type: trojan
+    password: 375feb10-db47-11ef-841e-1239d0255272
+    skip-cert-verify: true
+    sni: asia1.fufo.org
+    network: ws
+    ws-opts:
+      path: /trojanws
+      headers:
+        Host: asia1.fufo.org
+    udp: true
 proxy-groups:
   - name: ID-X
     type: fallback
@@ -86,6 +98,7 @@ proxy-groups:
       - SG Trojan-WS(2025-02-02)
       - SG Vless-WS(2025-02-01)
       - 443 Vmess Singapore HE-1 Limit 2025-01-30
+      - SG Trojan-WS
 
   - name: MIX-X
     type: fallback
@@ -95,6 +108,7 @@ proxy-groups:
       - SG Trojan-WS(2025-02-02)
       - SG Vless-WS(2025-02-01)
       - 443 Vmess Singapore HE-1 Limit 2025-01-30
+      - SG Trojan-WS
       
   - name: IKLAN
     type: select
