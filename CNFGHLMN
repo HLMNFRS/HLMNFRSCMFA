@@ -1,0 +1,151 @@
+port: 7890
+socks-port: 7891
+redir-port: 7892
+mixed-port: 7893
+tproxy-port: 7895
+ipv6: false
+mode: rule
+log-level: silent
+allow-lan: true
+external-controller: 0.0.0.0:9090
+secret: ""
+bind-address: "*"
+unified-delay: true
+profile:
+  store-selected: true
+dns:
+  enable: true
+  ipv6: false
+  enhanced-mode: redir-host
+  listen: 0.0.0.0:7874
+  nameserver:
+    - 8.8.8.8
+    - 1.0.0.1
+    - https://dns.google/dns-query
+  fallback:
+    - 1.1.1.1
+    - 8.8.4.4
+    - https://cloudflare-dns.com/dns-query
+    - 112.215.203.254
+  default-nameserver:
+    - 8.8.8.8
+    - 1.1.1.1
+    - 112.215.203.254
+proxies:
+  - name: Trojan-WS
+    server: 104.26.7.171
+    port: 443
+    type: trojan
+    password: 375feb10-db47-11ef-841e-1239d0255272
+    skip-cert-verify: true
+    sni: sg3.socifiles.com
+    network: ws
+    ws-opts:
+      path: /trojanws
+      headers:
+        Host: sg3.socifiles.com
+    udp: true
+  - name: SG Vless-WS(2025-02-01)
+    server: 104.26.7.171
+    port: 443
+    type: vless
+    uuid: faf00d10-db33-11ef-b18c-1239d0255272
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: sg3.socifiles.com
+    network: ws
+    ws-opts:
+      path: /vlws
+      headers:
+        Host: sg3.socifiles.com
+    udp: true
+  - name: 443 Vmess Singapore HE-1 Limit 2025-01-30
+    server: 104.26.7.171
+    port: 443
+    type: vmess
+    uuid: 8b93c860-d8e4-11ef-b434-205c6d5f5d78
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: sg-1.hihu.net
+    network: ws
+    ws-opts:
+      path: /5noqlk94
+      headers:
+        Host: sg-1.hihu.net
+    udp: true
+  - name: SG Trojan-WS
+    server: 104.22.20.245
+    port: 443
+    type: trojan
+    password: 941de990-dbb5-11ef-b637-205c6d5f5d78
+    skip-cert-verify: true
+    sni: asia1.fufo.org
+    network: ws
+    ws-opts:
+      path: /trojanws
+      headers:
+        Host: asia1.fufo.org
+    udp: true
+  - name: Vmess OpTunel
+    server: 104.26.7.171
+    port: 443
+    type: vmess
+    uuid: a40d34c6-b77c-4648-9210-3e8d2f4226b5
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: sgv-3.openv2ray.com
+    network: ws
+    ws-opts:
+      path: /opentunnel?user=opentunnel.net-yuhg
+      headers:
+        Host: sgv-3.openv2ray.com
+    udp: true
+
+  - name: ID JAGOANSSH
+    server: 104.22.20.245
+    port: 443
+    type: vmess
+    uuid: 643cfca0-3721-4ee9-a3ad-5c5a1670db82
+    alterId: 0
+    cipher: auto
+    tls: false
+    skip-cert-verify: true
+    servername: id1-ray.ipservers.xyz
+    network: ws
+    ws-opts:
+      path: /JAGOANSSH/
+      headers:
+        Host: id1-ray.ipservers.xyz
+    udp: true
+
+proxy-groups:
+  - name: MIX-X
+  type: load-balance
+  strategy: round-robin
+  disable-udp: false
+  proxies:
+      - Trojan-WS
+      -  SG Vless-WS(2025-02-01)
+      - 443 Vmess Singapore HE-1 Limit 2025-01-30
+      - SG Trojan-WS
+      - Vmess OpTunel
+      - ID JAGOANSSH
+  url: http://www.gstatic.com/generate_204
+  interval: '360'
+
+rules:
+ - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
+ - RULE-SET,Tiktok,MIX-X
+ - MATCH,MIX-X
+
+
+rule-providers:
+  Tiktok:
+    type: file
+    behavior: domain
+    path: ./tiktok.yaml
