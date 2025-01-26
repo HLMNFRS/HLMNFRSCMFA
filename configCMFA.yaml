@@ -105,17 +105,30 @@ proxies:
       headers:
         Host: sgv-3.openv2ray.com
     udp: true
+
+  - name: ID JAGOANSSH
+    server: 104.22.20.245
+    port: 443
+    type: vmess
+    uuid: 643cfca0-3721-4ee9-a3ad-5c5a1670db82
+    alterId: 0
+    cipher: auto
+    tls: false
+    skip-cert-verify: true
+    servername: id1-ray.ipservers.xyz
+    network: ws
+    ws-opts:
+      path: /JAGOANSSH/
+      headers:
+        Host: id1-ray.ipservers.xyz
+    udp: true
 proxy-groups:
   - name: ID-X
     type: fallback
     url: http://www.gstatic.com/generate_204
     interval: 300
     proxies:
-      - Trojan-WS
-      - SG Vless-WS(2025-02-01)
-      - 443 Vmess Singapore HE-1 Limit 2025-01-30
-      - SG Trojan-WS
-      - Vmess OpTunel
+      - ID JAGOANSSH
       
   - name: MIX-X
     type: fallback
