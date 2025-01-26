@@ -32,7 +32,7 @@ dns:
     - 1.1.1.1
     - 112.215.203.254
 proxies:
-  - name: SG Trojan-WS(2025-02-02)
+  - name: Trojan-WS
     server: 104.26.7.171
     port: 443
     type: trojan
@@ -111,7 +111,7 @@ proxy-groups:
     url: http://www.gstatic.com/generate_204
     interval: 300
     proxies:
-      - SG Trojan-WS(2025-02-02)
+      - Trojan-WS
       - SG Vless-WS(2025-02-01)
       - 443 Vmess Singapore HE-1 Limit 2025-01-30
       - SG Trojan-WS
@@ -122,7 +122,7 @@ proxy-groups:
     url: http://www.gstatic.com/generate_204
     interval: 300
     proxies:
-      - SG Trojan-WS(2025-02-02)
+      - Trojan-WS
       - SG Vless-WS(2025-02-01)
       - 443 Vmess Singapore HE-1 Limit 2025-01-30
       - SG Trojan-WS
